@@ -30,7 +30,7 @@ def handler(event, context):
             logger.info("Successfully deleted")
 
     except Exception as ex:
-        logger.error("Faild to encrypt value: %s", ex.message)
+        logger.error("Failed to encrypt value: %s", str(ex))
         logger.debug("Stack trace %s", traceback.format_exc())
 
         if event["RequestType"] in ["Create", "Update"]:

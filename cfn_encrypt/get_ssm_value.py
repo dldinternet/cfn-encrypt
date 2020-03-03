@@ -56,7 +56,7 @@ def handler(event, context):
             cfnresponse.send(event, context, cfnresponse.SUCCESS, None, name, noEcho=True)
 
     except Exception as ex:
-        logger.error("Faild get parameter value: %s", name)
+        logger.error("Failed get parameter value: %s", name)
         logger.debug("Stack trace %s", traceback.format_exc())
         if event["RequestType"] in ["Create", "Update"]:
             cfnresponse.send(event, context, cfnresponse.FAILED, None, "0", noEcho=True)
