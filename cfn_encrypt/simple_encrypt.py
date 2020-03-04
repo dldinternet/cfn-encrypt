@@ -23,7 +23,12 @@ def handler(event, context):
             response = dict()
             response["CiphertextBase64"] = base64.b64encode(encrypted["CiphertextBlob"])
             response["KeyId"] = encrypted["KeyId"]
-            cfnresponse.send(event, context, cfnresponse.SUCCESS, response, "1")
+            strresponse = dict()
+            for k,v in response.items():
+                if isinstance(v, bytes):
+                    v = v.decode('utf-8')
+                strresponse[k] = v
+            cfnresponse.send(event, context, cfnresponse.SUCCESS, strresponse, "1")
             logger.info("Successfully encrypted value")
         else:
             cfnresponse.send(event, context, cfnresponse.SUCCESS, None, "1")
